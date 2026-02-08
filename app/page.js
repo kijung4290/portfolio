@@ -1,5 +1,7 @@
 import { getPortfolioData } from '@/lib/data';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const rawData = await getPortfolioData();
   const data = rawData || {}; // Fallback to empty object
