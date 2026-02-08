@@ -8,8 +8,6 @@ export async function GET() {
         const jsonPath = path.join(process.cwd(), 'data', 'portfolio.json');
 
         if (!fs.existsSync(jsonPath)) {
-            // Try to look in root if data dir doesn't exist? No, data/portfolio.json is standard.
-            // If file doesn't exist, maybe we can't migrate.
             return NextResponse.json({ error: 'data/portfolio.json not found. Nothing to migrate.' }, { status: 404 });
         }
 
