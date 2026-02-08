@@ -118,7 +118,6 @@ h6 {
   color: var(--accent-foreground);
   font-weight: 600;
   border-radius: 9999px;
-  /* Rounded pill shape fits the geometric style */
   font-size: 1rem;
   transition: transform 0.2s ease, opacity 0.2s ease;
   border: 2px solid var(--accent);
@@ -161,6 +160,61 @@ h6 {
 .nav-link {
   font-size: 1rem;
   font-weight: 500;
+}
+
+/* Project Card */
+.project-card {
+  display: block;
+  background: var(--muted);
+  padding: 40px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none !important;
+  /* Override default a style */
+}
+
+.project-card:hover {
+  /* Hover effect specific to card */
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  opacity: 1 !important;
+  /* Override 'a:hover' opacity */
+}
+
+.project-card-number {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  font-weight: 700;
+  opacity: 0.1;
+}
+
+.project-card h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.project-card p {
+  margin-bottom: 2rem;
+}
+
+.project-card span {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .experience-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 /* Footer */

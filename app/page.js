@@ -10,7 +10,6 @@ export default async function Home() {
   return (
     <main>
       <nav className="container nav">
-        {/* Simple text logo, possibly sticking to the top */}
         <div className="nav-logo">{data.name || "Portfolio"}</div>
         <div className="nav-links">
           <a href="#work" className="nav-link">Work</a>
@@ -49,7 +48,7 @@ export default async function Home() {
         <h2 className="text-large" style={{ marginBottom: "60px" }}>Experience</h2>
         <div className="grid">
           {data.experiences && data.experiences.map((exp) => (
-            <div key={exp.id} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "2rem", borderTop: "1px solid var(--border)", padding: "40px 0" }}>
+            <div key={exp.id} className="experience-item">
               <div>
                 <h3 style={{ fontSize: "1.5rem", fontWeight: "600" }}>{exp.company}</h3>
                 <p style={{ color: "var(--muted-text)", marginTop: "0.5rem" }}>{exp.period}</p>
@@ -67,13 +66,13 @@ export default async function Home() {
         <h2 className="text-large" style={{ marginBottom: "60px" }}>Projects</h2>
         <div className="grid grid-cols-2">
           {data.projects && data.projects.map((project) => (
-            <a href={project.link || "#"} key={project.id} style={{ display: "block", background: "var(--muted)", padding: "40px", borderRadius: "12px", transition: "transform 0.2s" }} className="project-card">
-              <div style={{ marginBottom: "20px", fontSize: "3rem", fontWeight: "700", opacity: "0.1" }}>
+            <a href={project.link || "#"} key={project.id} className="project-card">
+              <div className="project-card-number">
                 {String(project.id).padStart(2, '0')}
               </div>
-              <h3 style={{ fontSize: "1.75rem", marginBottom: "1rem" }}>{project.title}</h3>
-              <p className="text-body" style={{ marginBottom: "2rem" }}>{project.description}</p>
-              <span style={{ textDecoration: "underline", fontWeight: "600" }}>View Project &rarr;</span>
+              <h3>{project.title}</h3>
+              <p className="text-body">{project.description}</p>
+              <span>View Project &rarr;</span>
             </a>
           ))}
         </div>
@@ -88,6 +87,7 @@ export default async function Home() {
             <p>Email: <a href={`mailto:${data.contact.email}`} style={{ textDecoration: "underline" }}>{data.contact.email}</a></p>
             <p>Phone: {data.contact.phone}</p>
             {data.contact.blog && <p>Blog: <a href={data.contact.blog} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>Visit Blog</a></p>}
+            {data.contact.github && <p>GitHub: <a href={data.contact.github} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>GitHub</a></p>}
           </div>
         </div>
         <div style={{ marginTop: "80px", color: "var(--muted-text)", fontSize: "0.875rem" }}>
