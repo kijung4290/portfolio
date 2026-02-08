@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getPortfolioData, savePortfolioData } from '@/lib/data';
 
 export async function GET() {
@@ -11,6 +12,8 @@ export async function POST(request) {
         const body = await request.json();
         const success = await savePortfolioData(body);
         if (success) {
+            // Invalidate the cache for the home page so updates are reflected immediately
+            revalidatePath('/');
             return NextResponse.json({ message: 'Saved successfully' });
         } else {
             return NextResponse.json({ error: 'Failed to save data' }, { status: 500 });
