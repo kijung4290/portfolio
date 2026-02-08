@@ -12,6 +12,26 @@
   border-bottom: 1px solid var(--border);
   text-align: center;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.profileWrapper {
+  margin-bottom: 2rem;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.profileImage {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .title {

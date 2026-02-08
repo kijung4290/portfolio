@@ -38,7 +38,23 @@ export default async function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className={styles.hero}>
+      <section
+        className={styles.hero}
+        style={data.backgroundImage ? {
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.8)), url(${data.backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        } : {}}
+      >
+        {data.profileImage && (
+          <div className={styles.profileWrapper}>
+            <img
+              src={data.profileImage}
+              alt={data.name || "Profile"}
+              className={styles.profileImage}
+            />
+          </div>
+        )}
         <div className="badge">
           Open to Opportunities
         </div>
