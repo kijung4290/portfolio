@@ -1,95 +1,111 @@
 import { getPortfolioData } from '@/lib/data';
-import Link from 'next/link';
-import styles from './page.module.css';
-
-export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const data = await getPortfolioData();
+  const rawData = await getPortfolioData();
+  const data = rawData || {}; // Fallback to empty object
 
-  if (!data) return <div className="container" style={{ padding: '5rem' }}>Loading... If this persists, run `npm run dev` again.</div>;
+  // Safe defaults
+  const contact = data.contact || {};
+  const experiences = data.experiences || [];
+  const projects = data.projects || [];
+  const about = data.about || [];
+
+  if (!rawData && !data.name) {
+    // If absolutely no data, show a setup hint
+    return (
+      <div className="container" style={{ padding: "100px 0", textAlign: "center" }}>
+        <h1>Portfolio Not Setup</h1>
+        <p>Database is empty. Please visit <a href="/api/setup/migrate" style={{ textDecoration: 'underline' }}>Migrate Data</a> to initialize.</p>
+      </div>
+    );
+  }
 
   return (
     <main>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className="container">
-          <h1 className={styles.title}>{data.name}</h1>
-          <p className={styles.subtitle}>{data.role}</p>
-          <p className={styles.intro}>{data.introduction}</p>
-          <div className={styles.buttons}>
-            <a href="#contact" className="btn btn-primary">연락하기</a>
-            <a href="#projects" className="btn btn-outline">프로젝트 보기</a>
+      <nav className="container nav">
+        <div className="nav-logo">{data.name || "Portfolio"}</div>
+        <div className="nav-links">
+          <a href="#about" className="nav-link">Philosophy</a>
+          <a href="#experience" className="nav-link">Experience</a>
+          <a href="#projects" className="nav-link">Projects</a>
+          <a href="#contact" className="nav-link">Contact</a>
+        </div>
+      </nav>
+
+      <section className="container" style={{ padding: "120px 0 80px" }}>
+        <h1 className="text-hero">
+          {data.role || "Social Worker"}
+        </h1>
+        <p className="text-large" style={{ maxWidth: "800px", color: "var(--muted-text)" }}>
+          {data.introduction || "Welcome to my portfolio."}
+        </p>
+      </section>
+
+      <section id="about" className="container" style={{ padding: "80px 0" }}>
+        <div className="grid grid-cols-2">
+          <div>
+            <h2 className="text-large">Philosophy</h2>
+          </div>
+          <div>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {about.map((item, index) => (
+                <li key={index} style={{ marginBottom: "1.5rem", fontSize: "1.25rem", borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="section container">
-        <h2 className={styles.sectionTitle}>About Me</h2>
-        <div className={styles.grid} style={{ gridTemplateColumns: '1fr' }}>
-          <ul className={styles.intro} style={{ margin: '0 auto', textAlign: 'left', listStyle: 'none' }}>
-            {data.about.map((item, index) => (
-              <li key={index} style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'var(--primary)', marginRight: '1rem', fontWeight: 'bold' }}>✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section id="experience" className="section" style={{ background: 'var(--background)' }}>
-        <div className="container">
-          <h2 className={styles.sectionTitle}>경력 사항</h2>
-          <div className={styles.timeline}>
-            {data.experiences.map((exp) => (
-              <div key={exp.id} className={styles.timelineItem}>
-                <span className={styles.period}>{exp.period}</span>
-                <h3 className={styles.role}>{exp.role}</h3>
-                <h4 className={styles.company}>{exp.company}</h4>
-                <p style={{ color: 'var(--text-secondary)' }}>{exp.description}</p>
+      <section id="experience" className="container" style={{ padding: "80px 0" }}>
+        <h2 className="text-large" style={{ marginBottom: "60px" }}>Experience</h2>
+        <div className="grid">
+          {experiences.map((exp, index) => (
+            <div key={exp.id || index} className="experience-item">
+              <div>
+                <h3 style={{ fontSize: "1.5rem", fontWeight: "600" }}>{exp.company}</h3>
+                <p style={{ color: "var(--muted-text)", marginTop: "0.5rem" }}>{exp.period}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="section container">
-        <h2 className={styles.sectionTitle}>주요 프로젝트</h2>
-        <div className={styles.grid}>
-          {data.projects.map((project) => (
-            <div key={project.id} className={styles.projectCard}>
-              <h3 className={styles.projectTitle}>{project.title}</h3>
-              <p className={styles.projectDesc}>{project.description}</p>
-              {project.link && (
-                <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: '600' }}>
-                  자세히 보기 →
-                </a>
-              )}
+              <div>
+                <h4 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{exp.role}</h4>
+                <p className="text-body">{exp.description}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className={styles.contact}>
-        <div className="container">
-          <h2 className={styles.sectionTitle} style={{ color: 'white' }}>Contact Me</h2>
-          <div className={styles.contactItem}>
-            <span>📧</span>
-            <a href={`mailto:${data.contact.email}`} style={{ color: 'white', textDecoration: 'underline' }}>{data.contact.email}</a>
-          </div>
-          <div className={styles.contactItem}>
-            <span>📞</span>
-            <span>{data.contact.phone}</span>
-          </div>
+      <section id="projects" className="container" style={{ padding: "80px 0" }}>
+        <h2 className="text-large" style={{ marginBottom: "60px" }}>Projects</h2>
+        <div className="grid grid-cols-2">
+          {projects.map((project, index) => (
+            <a href={project.link || "#"} key={project.id || index} className="project-card">
+              <div className="project-card-number">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <h3>{project.title}</h3>
+              <p className="text-body">{project.description}</p>
+              <span>View Project &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </section>
 
-          <Link href="/admin" className={styles.footerLink}>
-            관리자 페이지 (Admin Login)
-          </Link>
+      <section id="contact" className="container footer">
+        <div className="grid grid-cols-2">
+          <div>
+            <h2 className="text-large">Contact</h2>
+          </div>
+          <div style={{ fontSize: "1.25rem", lineHeight: "2" }}>
+            <p>Email: <a href={`mailto:${contact.email}`} style={{ textDecoration: "underline" }}>{contact.email || "N/A"}</a></p>
+            <p>Phone: {contact.phone || "N/A"}</p>
+            {contact.blog && <p>Blog: <a href={contact.blog} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>Visit Blog</a></p>}
+            {contact.github && <p>GitHub: <a href={contact.github} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>GitHub</a></p>}
+          </div>
+        </div>
+        <div style={{ marginTop: "80px", color: "var(--muted-text)", fontSize: "0.875rem" }}>
+          &copy; {new Date().getFullYear()} {data.name || "Me"}. All rights reserved.
         </div>
       </section>
     </main>
