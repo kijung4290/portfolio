@@ -60,16 +60,17 @@
   padding: 120px 0;
 }
 
-font-size: clamp(2rem, 4vw, 2.5rem);
-font-weight: 800;
-text-align: center;
-margin: 0 auto 80px;
-/* Centering fix */
-color: var(--foreground);
-position: relative;
-display: block;
-width: fit-content;
-/* Ensure underline matches text width */
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
+  text-align: center;
+  margin: 0 auto 80px;
+  /* Centering fix */
+  color: var(--foreground);
+  position: relative;
+  display: block;
+  width: fit-content;
+  /* Ensure underline matches text width */
 }
 
 .sectionTitle::after {
