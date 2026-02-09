@@ -25,11 +25,11 @@ export default async function Home() {
   return (
     <main>
       {/* Navigation */}
-      <nav className="container" style={{ padding: '2rem 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontWeight: '800', fontSize: '1.25rem', letterSpacing: '-0.02em' }}>
+      <nav className={`${styles.nav} container`}>
+        <div className={styles.navLogo}>
           {data.name || "Portfolio"}
         </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.95rem', fontWeight: '500' }}>
+        <div className={styles.navLinks}>
           <a href="#about">Philosophy</a>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
