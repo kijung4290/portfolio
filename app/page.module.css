@@ -324,20 +324,74 @@
 /* MOBILE */
 @media (max-width: 768px) {
   .hero {
-    padding: 120px 20px 80px;
+    padding: 100px 20px 60px;
   }
 
+  .title {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Adjust Grid Layouts for Mobile */
+  .aboutGrid,
+  .projectGrid {
+    grid-template-columns: 1fr;
+    /* Stack items vertically */
+    gap: 20px;
+  }
+
+  .aboutItem,
+  .projectCard {
+    padding: 24px;
+    /* Reduce padding inside cards */
+  }
+
+  /* Timeline Adjustments */
   .timeline {
     padding-left: 20px;
+    /* Less indentation */
+    margin-left: 10px;
+  }
+
+  .timelineItem {
+    margin-bottom: 40px;
   }
 
   .timelineItem::after {
     left: -26px;
     width: 10px;
     height: 10px;
+    top: 6px;
   }
 
-  .title {
-    font-size: 2.5rem;
+  .role {
+    font-size: 1.25rem;
+  }
+
+  .company {
+    font-size: 1rem;
+  }
+
+  /* Contact Section */
+  .contact {
+    padding: 60px 0;
+  }
+
+  .contactGrid {
+    flex-direction: column;
+    /* Stack contact items */
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  /* Navigation (Targeting global nav if possible, or adjust parent padding) */
+  .sectionTitle {
+    font-size: 1.75rem;
+    margin-bottom: 40px;
   }
 }
