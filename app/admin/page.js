@@ -269,6 +269,16 @@ export default function AdminPage() {
                                 <input name="role" value={data.role || ''} onChange={handleBasicChange} className="form-control" />
                             </div>
                         </div>
+                        <div className="grid grid-cols-2" style={{ gap: '20px' }}>
+                            <div className="form-group">
+                                <label className="form-label">Profile Image URL</label>
+                                <input name="profileImage" value={data.profileImage || ''} onChange={handleBasicChange} className="form-control" placeholder="https://..." />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Background Image URL</label>
+                                <input name="backgroundImage" value={data.backgroundImage || ''} onChange={handleBasicChange} className="form-control" placeholder="https://..." />
+                            </div>
+                        </div>
                         <div className="form-group">
                             <label className="form-label">Introduction</label>
                             <textarea name="introduction" value={data.introduction || ''} onChange={handleBasicChange} className="form-control" style={{ minHeight: '120px', lineHeight: '1.6' }} />
