@@ -1,4 +1,84 @@
-export default function Home() {
+import { getPortfolioData } from '@/lib/data';
+
+export default async function Home() {
+  const rawData = await getPortfolioData();
+  const data = rawData || {};
+
+  // 기본값 설정 (Admin 데이터가 없을 때를 대비한 템플릿 기본값)
+  const name = data.name || "이수진";
+  const role = data.role || "그래픽 디자이너";
+  const introduction = data.introduction || "저는 간결함과 기능성을 추구하면서도 동시에 예술적 표현을 중요시하는 디자이너입니다. 클라이언트의 목표를 이해하고, 그 목표를 달성하기 위해 창의적이고 효과적인 디자인을 해결합니다.";
+
+  const contact = data.contact || {};
+  const email = contact.email || "hello@reallygreatsite.com";
+  const phone = contact.phone || "123 - 456 - 7890";
+  const website = contact.blog || "www.reallygreatsite.com";
+
+  // 경험 (Experiences) 데이터
+  // 데이터베이스에 내용이 없으면 기본 템플릿 사용
+  const defaultExperiences = [
+    {
+      id: 1,
+      company: "Liceria & Co. 회사",
+      role: "디자인팀 · 파트장",
+      period: "2025년 12월 - 2028년 2월 / 2년 2개월",
+      description: "웹사이트 구축 프로젝트\n로고 및 기업 브랜딩 구축 프로젝트\n웹사이트 구축 프로젝트",
+      color: "purple"
+    },
+    {
+      id: 2,
+      company: "Salford & Co. 회사",
+      role: "디자인팀 · 선임",
+      period: "2023년 12월 - 2025년 2월 / 1년 2개월",
+      description: "웹사이트 구축 프로젝트\n로고 및 기업 브랜딩 3개 구축 프로젝트",
+      color: "orange"
+    },
+    {
+      id: 3,
+      company: "Borcelle 회사",
+      role: "디자인팀 · 주임",
+      period: "2020년 12월 - 2023년 2월 / 2년 2개월",
+      description: "웹사이트 구축 프로젝트\n로고 및 기업 브랜딩 구축 프로젝트",
+      color: "yellow"
+    }
+  ];
+
+  const experiences = (data.experiences && data.experiences.length > 0)
+    ? data.experiences
+    : defaultExperiences;
+
+  const getCompanyLogo = (index) => {
+    // 0 = purple, 1 = orange, 2 = yellow
+    const colors = ["purple", "orange", "yellow"];
+    const col = colors[index % colors.length];
+
+    if (col === "purple") {
+      return (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#F3E8FF" />
+          <path d="M16 6L22 12L16 18L10 12L16 6Z" fill="#A855F7" opacity="0.8" />
+          <path d="M16 14L22 20L16 26L10 20L16 14Z" fill="#8B5CF6" />
+        </svg>
+      );
+    } else if (col === "orange") {
+      return (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#FFEDD5" />
+          <circle cx="16" cy="16" r="8" fill="#F97316" opacity="0.6" />
+          <circle cx="16" cy="16" r="4" fill="#EA580C" />
+        </svg>
+      );
+    } else {
+      return (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#FEF9C3" />
+          <path d="M8 8H24V24H8V8Z" fill="#EAB308" opacity="0.4" />
+          <circle cx="16" cy="16" r="4" fill="#CA8A04" />
+        </svg>
+      );
+    }
+  };
+
   return (
     <div className="resume-wrapper">
       <div className="resume-container">
@@ -12,23 +92,23 @@ export default function Home() {
           {/* 1. 프로필 섹션 */}
           <section className="profile-section">
             <div className="profile-info">
-              <h2 className="role">그래픽 디자이너</h2>
-              <h1 className="name">이수진</h1>
-              <p className="description">
-                저는 간결함과 기능성을 추구하면서도 동시에 예술적 표현을 중요시하는 디자이너입니다. 클라이언트의 목표를 이해하고, 그 목표를 달성하기 위해 창의적이고 효과적인 디자인을 해결합니다.
+              <h2 className="role">{role}</h2>
+              <h1 className="name">{name}</h1>
+              <p className="description" style={{ whiteSpace: 'pre-line' }}>
+                {introduction}
               </p>
               <div className="contact-info">
                 <div className="contact-item">
                   <span className="contact-label">웹사이트</span>
-                  <span>www.reallygreatsite.com</span>
+                  <span>{website}</span>
                 </div>
                 <div className="contact-item">
                   <span className="contact-label">이메일</span>
-                  <span>hello@reallygreatsite.com</span>
+                  <span>{email}</span>
                 </div>
                 <div className="contact-item">
                   <span className="contact-label">전화번호</span>
-                  <span>123 - 456 - 7890</span>
+                  <span>{phone}</span>
                 </div>
               </div>
             </div>
@@ -43,11 +123,17 @@ export default function Home() {
                   <path d="M0 160C0 137.909 17.9086 120 40 120H160C182.091 120 200 137.909 200 160V200H40C17.9086 200 0 182.091 0 160Z" fill="#D1D5DB" />
                 </svg>
 
-                {/* 모델 사진 대체용 스타일드 박스 */}
-                <div className="photo">
-                  <div className="photo-inner">
-                    <span style={{ color: '#999' }}>사진</span>
-                  </div>
+                {/* 프로필 이미지 혹은 대체 텍스트 */}
+                <div className="photo" style={{
+                  backgroundImage: data.profileImage ? `url(${data.profileImage})` : 'none',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}>
+                  {!data.profileImage && (
+                    <div className="photo-inner">
+                      <span style={{ color: '#999' }}>사진</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="yellow-smile">
@@ -73,76 +159,50 @@ export default function Home() {
             <h3 className="section-title">경력 & 프로젝트</h3>
             <div className="experience-list">
 
-              <div className="experience-item">
-                <div className="company-logo">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="8" fill="#F3E8FF" />
-                    <path d="M16 6L22 12L16 18L10 12L16 6Z" fill="#A855F7" opacity="0.8" />
-                    <path d="M16 14L22 20L16 26L10 20L16 14Z" fill="#8B5CF6" />
-                  </svg>
-                </div>
-                <div className="experience-content">
-                  <div className="experience-header">
-                    <h4 className="job-title">Liceria & Co. 회사 · 디자인팀 · 파트장</h4>
-                    <span className="job-period">2025년 12월 - 2028년 2월 / 2년 2개월</span>
+              {experiences.map((exp, index) => (
+                <div className="experience-item" key={exp.id || index}>
+                  <div className="company-logo">
+                    {getCompanyLogo(index)}
                   </div>
-                  <ul className="project-list">
-                    <li>웹사이트 구축 프로젝트</li>
-                    <li>로고 및 기업 브랜딩 구축 프로젝트</li>
-                    <li>웹사이트 구축 프로젝트</li>
-                    <li>로고 및 기업 브랜딩 구축 프로젝트</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="experience-item">
-                <div className="company-logo">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="8" fill="#FFEDD5" />
-                    <circle cx="16" cy="16" r="8" fill="#F97316" opacity="0.6" />
-                    <circle cx="16" cy="16" r="4" fill="#EA580C" />
-                  </svg>
-                </div>
-                <div className="experience-content">
-                  <div className="experience-header">
-                    <h4 className="job-title">Salford & Co. 회사 · 디자인팀 · 선임</h4>
-                    <span className="job-period">2023년 12월 - 2025년 2월 / 1년 2개월</span>
+                  <div className="experience-content">
+                    <div className="experience-header">
+                      <h4 className="job-title">{exp.company} · {exp.role}</h4>
+                      <span className="job-period">{exp.period}</span>
+                    </div>
+                    {/* description 줄바꿈 기준으로 리스트 렌더링 */}
+                    {exp.description && (
+                      <ul className="project-list">
+                        {exp.description.split('\n').filter(Boolean).map((line, i) => (
+                          <li key={i}>{line}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <ul className="project-list">
-                    <li>웹사이트 구축 프로젝트</li>
-                    <li>로고 및 기업 브랜딩 3개 구축 프로젝트</li>
-                    <li>웹사이트 구축 프로젝트</li>
-                  </ul>
                 </div>
-              </div>
-
-              <div className="experience-item">
-                <div className="company-logo">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="8" fill="#FEF9C3" />
-                    <path d="M8 8H24V24H8V8Z" fill="#EAB308" opacity="0.4" />
-                    <circle cx="16" cy="16" r="4" fill="#CA8A04" />
-                  </svg>
-                </div>
-                <div className="experience-content">
-                  <div className="experience-header">
-                    <h4 className="job-title">Borcelle 회사 · 디자인팀 · 주임</h4>
-                    <span className="job-period">2020년 12월 - 2023년 2월 / 2년 2개월</span>
-                  </div>
-                  <ul className="project-list">
-                    <li>웹사이트 구축 프로젝트</li>
-                    <li>로고 및 기업 브랜딩 구축 프로젝트</li>
-                    <li>웹사이트 구축 프로젝트</li>
-                    <li>로고 및 기업 브랜딩 구축 프로젝트</li>
-                  </ul>
-                </div>
-              </div>
+              ))}
 
             </div>
           </section>
 
-          {/* 3. 하단 섹션 (교육 / 스킬) */}
-          <section className="bottom-section">
+          {/* 3. 하단 섹션 (교육 / 스킬 - 이부분은 관리자모드 외의 기본 템플릿 영역) */}
+          <section className="bottom-section" style={{ marginTop: data.projects && data.projects.length > 0 ? "0px" : "60px" }}>
+
+            {/* 데이터가 있을 경우 Projects 영역으로도 렌더링을 지원 */}
+            {data.projects && data.projects.length > 0 ? (
+              <div className="education-section" style={{ gridColumn: "1 / -1", marginBottom: "40px" }}>
+                <h3 className="section-title">기타 프로젝트</h3>
+                <div className="education-list">
+                  {data.projects.map((proj, idx) => (
+                    <div className="education-item" key={idx}>
+                      <h4>{proj.title}</h4>
+                      <p>{proj.description}</p>
+                      {proj.link && <a href={proj.link} target="_blank" rel="noreferrer" style={{ fontSize: "0.85rem", color: "var(--primary-color)", textDecoration: "underline" }}>자세히 보기</a>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
             <div className="education-section">
               <h3 className="section-title">교육</h3>
               <div className="education-list">
