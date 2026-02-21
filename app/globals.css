@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
 
 :root {
@@ -10,34 +9,6 @@
   --text-light: #9CA3AF;
   --border-color: #E5E7EB;
   --primary-color: #A855F7;
-=======
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-
-:root {
-  /* Modern Professional Palette */
-  --background: #FAFAFA;
-  --surface: #FFFFFF;
-  --foreground: #191F28;
-  /* Deep Charcoal */
-  --muted: #8B95A1;
-  --muted-light: #F2F4F6;
-  --border: #E5E8EB;
-
-  --primary: #3182F6;
-  /* Trust Blue */
-  --primary-dark: #1B64DA;
-  --primary-light: #E8F3FF;
-
-  --accent: #191F28;
-  --on-accent: #FFFFFF;
-
-  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
->>>>>>> 9f7f726a3f6a056b2a01917e56c5169b0811990d
 }
 
 * {
@@ -47,7 +18,6 @@
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-<<<<<<< HEAD
 body {
   background-color: var(--bg-color);
   color: var(--text-dark);
@@ -60,30 +30,6 @@ body {
 
 /* 래퍼 및 컨테이너 */
 .resume-wrapper {
-=======
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-sans);
-  background-color: var(--background);
-  color: var(--foreground);
-  line-height: 1.6;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-/* Layout Utilities */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
->>>>>>> 9f7f726a3f6a056b2a01917e56c5169b0811990d
   width: 100%;
   max-width: 900px;
 }
@@ -101,7 +47,6 @@ a {
   border-bottom: 2px solid var(--border-color);
 }
 
-<<<<<<< HEAD
 .resume-title {
   font-weight: 700;
   font-size: 1.25rem;
@@ -235,157 +180,6 @@ a {
 }
 
 .experience-list {
-=======
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (max-width: 768px) {
-  .grid-cols-2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--foreground);
-}
-
-.text-hero {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #191F28 0%, #4B5563 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-large {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 700;
-  margin-bottom: 2rem;
-}
-
-.text-body {
-  font-size: 1.125rem;
-  color: #4B5563;
-  line-height: 1.7;
-}
-
-/* UI Elements */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-  box-shadow: 0 4px 6px rgba(49, 130, 246, 0.2);
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(49, 130, 246, 0.3);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 1px solid var(--border);
-  color: var(--foreground);
-}
-
-.btn-outline:hover {
-  background-color: var(--muted-light);
-  border-color: var(--muted);
-}
-
-.card {
-  background: var(--surface);
-  border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  overflow: hidden;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(49, 130, 246, 0.2);
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background: var(--muted-light);
-  color: var(--muted);
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-
-/* Components: Forms & Admin */
-.form-group {
-  margin-bottom: 24px;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--foreground);
-}
-
-.form-control {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background-color: #ffffff;
-  font-size: 1rem;
-  font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  color: var(--foreground);
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-}
-
-.admin-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  /* Very subtle shadow */
-}
-
-.admin-section-header {
->>>>>>> 9f7f726a3f6a056b2a01917e56c5169b0811990d
   display: flex;
   flex-direction: column;
 }
