@@ -47,6 +47,21 @@ export default async function Home() {
     ? data.experiences
     : defaultExperiences;
 
+  const defaultEducation = [
+    { school: "Liceria 대학원", details: "브랜드 마케팅 전공 · 2026년 졸업" },
+    { school: "Liceria 대학교", details: "브랜드 마케팅 전공 · 2023년 졸업" }
+  ];
+  const education = (data.education && data.education.length > 0) ? data.education : defaultEducation;
+
+  const defaultSkills = ["사진편집", "백터그래픽", "UI디자인"];
+  const skills = (data.skills && data.skills.length > 0) ? data.skills : defaultSkills;
+
+  const defaultOtherSkills = [
+    { label: "영어 능력", value: "원어민 (Native)" },
+    { label: "중국어 능력", value: "능통 (Fluent)" }
+  ];
+  const otherSkills = (data.otherSkills && data.otherSkills.length > 0) ? data.otherSkills : defaultOtherSkills;
+
   const getCompanyLogo = (index) => {
     // 0 = purple, 1 = orange, 2 = yellow
     const colors = ["purple", "orange", "yellow"];
@@ -206,35 +221,31 @@ export default async function Home() {
             <div className="education-section">
               <h3 className="section-title">교육</h3>
               <div className="education-list">
-                <div className="education-item">
-                  <h4>Liceria 대학원</h4>
-                  <p>브랜드 마케팅 전공 · 2026년 졸업</p>
-                </div>
-                <div className="education-item">
-                  <h4>Liceria 대학교</h4>
-                  <p>브랜드 마케팅 전공 · 2023년 졸업</p>
-                </div>
+                {education.map((edu, idx) => (
+                  <div className="education-item" key={idx}>
+                    <h4>{edu.school}</h4>
+                    <p>{edu.details}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="skills-section">
               <h3 className="section-title">디자인 스킬</h3>
               <div className="skills-chips">
-                <span className="chip">사진편집</span>
-                <span className="chip">백터그래픽</span>
-                <span className="chip">UI디자인</span>
+                {skills.map((skill, idx) => (
+                  <span className="chip" key={idx}>{skill}</span>
+                ))}
               </div>
 
               <h3 className="section-title" style={{ marginTop: '2rem' }}>그 외 능력</h3>
               <div className="other-skills">
-                <div className="skill-row">
-                  <span className="skill-label">영어 능력</span>
-                  <span>원어민 (Native)</span>
-                </div>
-                <div className="skill-row">
-                  <span className="skill-label">중국어 능력</span>
-                  <span>능통 (Fluent)</span>
-                </div>
+                {otherSkills.map((os, idx) => (
+                  <div className="skill-row" key={idx}>
+                    <span className="skill-label">{os.label}</span>
+                    <span>{os.value}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
